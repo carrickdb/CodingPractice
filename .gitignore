@@ -2,4 +2,6 @@
 .DS_Store
 *.pyc
 .idea/*
+.ipynb_checkpoints/*
 to_review
+*.ipynb
