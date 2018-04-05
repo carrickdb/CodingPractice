@@ -1,6 +1,6 @@
-horizontal = "ab"
+horizontal = "Darrick Dartle"
 
-vertical = "ba"
+vertical = "Iwillhackyou"
 
 charcount = {}
 
