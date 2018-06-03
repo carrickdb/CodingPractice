@@ -16,34 +16,49 @@
 # can do one pass over the string but for each letter still may need to do operations on each level
 #   --but some may disappear
 
+# how to know which index is the starting index?
+# each node will have a list at which its substring started
+# l: [2, 3]
+# l: [2]    o: [3]
+# ll: starts at 2; o: lo starts at o
+
+
+class Node:
+
+    def __init__(self, index):
+        self.index = index
+        self.children = {}
 
 
 class StringSearcher:
 
     def __init__(self, s):
-        self.tree = {}
+        self.tree = Node(None)
         curr = self.tree
         for i in range(len(s)):
             for j in range(i, len(s)):
                 curr_letter = s[j]
-                if curr_letter not in curr:
-                   curr[curr_letter] = {}
-                curr = curr[curr_letter]
+                if curr_letter not in curr.children:
+                    new_node = Node(i)
+                    curr.children[curr_letter] = new_node
+                curr = curr.children[curr_letter]
             curr = self.tree
 
     def search(self, t):
+        if t == "":
+            return -1
         curr = self.tree
-        for letter in t:
-            if letter not in curr:
-                return False
-            curr = curr[letter]
-        return True
+        for i in range(len(t)):
+            letter = t[i]
+            if letter not in curr.children:
+                return -1
+            curr = curr.children[letter]
+        return curr.index
 
 
 
-s = "Hello"
+s = "bibs"
 searcher = StringSearcher(s)
-T = ["Hello", "ell", "lo", "cat"]
-print(searcher.tree)
+T = ["b", "bi", "ib", "bib", "bibs", "sib", "s", "is", "ibs"]
 for t in T:
     print(searcher.search(t))
