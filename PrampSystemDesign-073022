@@ -1,0 +1,63 @@
+list of friends
+table of all photos
+get all photos from friends
+sort by most recent
+
+
+
+Photo1
+photo2
+.
+.
+.
+photo20
+load another 20
+
+
+client -> actual UI / application (not shown)
+|
+web server
+|                 \
+photos API         friendsAPI -- friendsDatabase
+|                \
+photos database    photo repository
+
+
+client opens app
+web server fetches user's friends from friendsAPI
+345
+678
+...
+
+asks photos API for 20 most recent photos
+  sends: friends
+photos API queries database for most recent 20
+- hold on to oldest timestamp
+database returns rows with locations of photos
+photos API fetches 20 actual photos from photo repository for server
+
+SELECT pointerToPhoto where userID = 123 or userID = 234 LIMIT 100 descending timestamp
+timestamp >= oldestTimestamp
+
+photos database schema:
+                                   (index)
+timestamp  photoID  pointerToPhoto userID
+
+friends database schema:
+userID   friendID
+123      345
+
+
+web server asks for batch of photos
+photos API retrieves 60 photos, caches 60 pointers to photos
+  - also cache actual photos of next 20
+web server asks for next 20
+
+
+UI    app cache   web server cache  photos API pointers
+            20
+web server cache is full:
+- can't add more machines
+- invalidate cache
+  - LRU
+  - when a user logs out

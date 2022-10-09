@@ -1,0 +1,40 @@
+
+count of 5s and 10s
+cases:
+5:
+	increment 5s
+10:
+	decrement 5s
+	increment 10s
+20:
+	decrement 1 10 and 1 5 or 3 5s
+
+test cases:
+nothing
+something other than 5 is the first bill
+5 5
+5 10
+5 5 5 20
+5 10 20
+
+
+"""
+fives = 0
+tens = 0
+for bill in bills:
+	if bill == 5:
+		fives += 1
+	elif bill == 10:
+		if fives == 0:
+			return False
+		fives -= 1
+		tens += 1
+	elif bill == 20:
+		if tens > 0 and fives > 0:
+			tens -= 1
+			fives -= 1
+		elif fives < 3:
+			return False
+		else:
+			fives -= 3
+return True

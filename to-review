@@ -1,0 +1,36 @@
+
+
+in-order traversal with a stack
+https://leetcode.com/problems/increasing-order-search-tree/
+Morris Traversal
+
+dynamic programming
+
+implement heap
+use Python's heapify
+
+pattern searching (e.g. KMP algorithm)
+
+https://leetcode.com/problems/remove-boxes/
+  - Got time exceeded
+  - Daryl has a different approach: https://leetcode.com/problems/remove-boxes/
+
+union-find
+
+CtCI
+17.10
+
+https://leetcode.com/problems/word-ladder/
+Code needs to be more concise; get to optimal solution
+
+reversing a linked list!!!!
+and this in particular: https://leetcode.com/problems/reorder-list/
+
+
+https://users.cs.duke.edu/~ola/ap/recurrence.html
+Recurrence 	            Algorithm           Big-Oh Solution
+T(n) = T(n/2) + O(1) 	  Binary Search       O(log n)
+T(n) = T(n-1) + O(1) 	  Sequential Search   O(n)
+T(n) = 2 T(n/2) + O(1) 	Tree traversal      O(n)
+T(n) = T(n-1) + O(n) 	  Selection Sort      O(n2)
+T(n) = 2 T(n/2) + O(n) 	Mergesort           O(n log n)

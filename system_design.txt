@@ -1,0 +1,37 @@
+
+	keep a hashmap with index for all words encountered
+	go through the hashmap and return the word with no duplicates and the lowest index
+
+	what if the hashmap is larger than your machine's memory?
+		put it on another machine and make a new one
+		have to also check that second hm
+
+without a hashmap: use a trie (with counts)
+
+
+if you have enough machines to hold hashmaps of all the non-dupe words in their section:
+
+	THIS DOESN'T WORK (a word that's unique in cluster 1 may appear twice in cluster 2)
+	use map on several parallel parts of the file to find non-duplicates within their cluster (with a hash table)
+	retain the index in which these non-dupes were found
+	?: keep doing this on the elements of the hashmaps themselves (with shuffling?) until the size doesn't reduce anymore
+
+	if more than one machine is still necessary to hold one hashtable in memory:
+		for each of the remaining elements:
+			check if they're present in the hash tables on the other clusters (O(nc) where c = num clusters)
+			if they are, eliminate them from their own hashtable
+			use map-reduce to return the element with the smallest index
+	otherwise, return the element with the smallest index
+if not, on each machine:
+	??: compress each word into a bitmap? (doesn't work if you can go through the file only once)
+	make a trie of all the words encountered with letter counts and index at the end
+	keep track of the minimum index
+	if a dupe is encountered, decrement one from each letter, removing any that go to 0
+	basically do the same thing as the above hashmap version, but with tries
+
+
+
+worst cases:
+they're all unique
+the duplicates are spread throughout the file
+for the trie: very few duplicate letters

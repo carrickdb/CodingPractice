@@ -1,0 +1,48 @@
+Requirements:
+
+- user has to be able to sign in to all their bank accounts without revealing passwords to Mint
+- gather data from the bank accounts (balances, payment categories)
+- UI showing name, list of banks, list balances, total expenses in each category
+- no mixing up user data
+- 1M users/month (5x a month)
+- make account
+- save history
+- display graphs (week/month) (instant)
+
+
+Database
+accounts
+- user name
+- password (hashed)
+
+purchases
+- userid (idx)
+- category
+- timestamp (idx)
+- amount
+- bank
+
+monthly_aggregates
+- userid
+- category
+- amount
+
+banks
+userid
+bank_name
+authentication
+
+
+                                           cluster (map-reduce)
+                                              /
+client (mobile/browser) -- load balancers - web server -- app server -- database
+                                              \
+                                             banks
+
+API
+login
+signup
+check_expenses
+add_bank_account(bank)
+week_graph(start_date)
+month_graph(start_date)
